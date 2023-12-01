@@ -1,0 +1,4 @@
+﻿  menu.c
+C:\Users\LokoDaVida\Desktop\baby\ProjetoC\menu.c(11,10): warning C4477: 'scanf_s' : format string '%s' requires an argument of type 'unsigned int', but variadic argument 2 has type 'size_t'
+C:\Users\LokoDaVida\Desktop\baby\ProjetoC\menu.c(11,10): message : this argument is used as a buffer size
+  ProjetoC.vcxproj -> C:\Users\LokoDaVida\Desktop\baby\ProjetoC\x64\Debug\ProjetoC.exe
