@@ -1,4 +1,0 @@
-C:\Users\LokoDaVida\Desktop\baby\ProjetoC\x64\Debug\ProjetoC.vcxproj.MdMergeInputs.cache
-C:\Users\LokoDaVida\Desktop\baby\ProjetoC\x64\Debug\ProjetoC.vcxproj.cppwinrt_plat.cache
-C:\Users\LokoDaVida\Desktop\baby\ProjetoC\x64\Debug\ProjetoC.vcxproj.cppwinrt_comp.cache
-C:\Users\LokoDaVida\Desktop\baby\ProjetoC\x64\Debug\ProjetoC.exe
