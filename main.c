@@ -1,17 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "menu.h"
 #include "product.h"
 
 int main()
 {
-	Product prod;
-	ptrProduct ptrProd;
+	FILE* file;
+	fopen_s(&file, "product.txt", "r+");
+	
+	if (!file)
+	{
+		printf("Error opening file!");
+		return EXIT_FAILURE;
+	}
 
 	int run = 1;
 	int* ptrRun = &run;
 
-	menu(ptrRun, ptrProd);
+	menu(file, ptrRun);
 
-	free(ptrProd);
+	fclose(file);
 
 	return EXIT_SUCCESS;
 }

@@ -1,0 +1,50 @@
+Id: 1, Name: Banana, Price: $14.00, Max Quantity: 30, Quantity: 23
+Id: 2, Name: Rice, Price: $12.00, Max Quantity: 50, Quantity: 16
+Id: 3, Name: Digital Camera, Price: $250.00, Max Quantity: 10, Quantity: 8
+Id: 4, Name: Rope, Price: $23.00, Max Quantity: 55, Quantity: 3
+Id: 5, Name: Apples, Price: $10.00, Max Quantity: 40, Quantity: 35
+Id: 6, Name: Laptop, Price: $800.00, Max Quantity: 20, Quantity: 15
+Id: 7, Name: Running Shoes, Price: $60.00, Max Quantity: 25, Quantity: 18
+Id: 8, Name: Umbrella, Price: $15.00, Max Quantity: 50, Quantity: 42
+Id: 9, Name: Headphones, Price: $50.00, Max Quantity: 30, Quantity: 22
+Id: 10, Name: Blanket, Price: $30.00, Max Quantity: 40, Quantity: 28
+Id: 11, Name: Coffee Maker, Price: $100.00, Max Quantity: 15, Quantity: 10
+Id: 12, Name: Soccer Ball, Price: $20.00, Max Quantity: 30, Quantity: 25
+Id: 13, Name: Toothpaste, Price: $3.00, Max Quantity: 50, Quantity: 45
+Id: 14, Name: Towels Set, Price: $40.00, Max Quantity: 20, Quantity: 17
+Id: 15, Name: Backpack, Price: $35.00, Max Quantity: 25, Quantity: 20
+Id: 16, Name: Sunglasses, Price: $25.00, Max Quantity: 35, Quantity: 30
+Id: 17, Name: Garden Hose, Price: $15.00, Max Quantity: 40, Quantity: 35
+Id: 18, Name: Alarm Clock, Price: $12.00, Max Quantity: 30, Quantity: 25
+Id: 19, Name: Portable Charger, Price: $20.00, Max Quantity: 25, Quantity: 18
+Id: 20, Name: Board Game, Price: $30.00, Max Quantity: 20, Quantity: 15
+Id: 21, Name: Dumbbell Set, Price: $50.00, Max Quantity: 15, Quantity: 10
+Id: 22, Name: Cooking Pot, Price: $25.00, Max Quantity: 20, Quantity: 15
+Id: 23, Name: Wall Clock, Price: $18.00, Max Quantity: 30, Quantity: 25
+Id: 24, Name: Power Drill, Price: $70.00, Max Quantity: 10, Quantity: 8
+Id: 25, Name: Wallet, Price: $15.00, Max Quantity: 40, Quantity: 35
+Id: 26, Name: Desk Lamp, Price: $25.00, Max Quantity: 30, Quantity: 22
+Id: 27, Name: Yoga Mat, Price: $20.00, Max Quantity: 25, Quantity: 18
+Id: 28, Name: Blender, Price: $40.00, Max Quantity: 15, Quantity: 10
+Id: 29, Name: Office Chair, Price: $120.00, Max Quantity: 10, Quantity: 8
+Id: 30, Name: T-shirt, Price: $15.00, Max Quantity: 50, Quantity: 45
+Id: 31, Name: Microwave Oven, Price: $90.00, Max Quantity: 10, Quantity: 8
+Id: 32, Name: Bookshelf, Price: $60.00, Max Quantity: 15, Quantity: 10
+Id: 33, Name: Potted Plant, Price: $25.00, Max Quantity: 30, Quantity: 25
+Id: 34, Name: Portable Speaker, Price: $35.00, Max Quantity: 20, Quantity: 15
+Id: 35, Name: Hand Sanitizer, Price: $5.00, Max Quantity: 50, Quantity: 40
+Id: 36, Name: Backpacking Tent, Price: $80.00, Max Quantity: 10, Quantity: 8
+Id: 37, Name: Swimming Goggles, Price: $18.00, Max Quantity: 30, Quantity: 25
+Id: 38, Name: Vacuum Cleaner, Price: $100.00, Max Quantity: 10, Quantity: 8
+Id: 39, Name: Wall Art, Price: $50.00, Max Quantity: 15, Quantity: 12
+Id: 40, Name: Electric Kettle, Price: $30.00, Max Quantity: 20, Quantity: 15
+Id: 41, Name: Car Phone Mount, Price: $12.00, Max Quantity: 30, Quantity: 25
+Id: 42, Name: Beach Towel, Price: $15.00, Max Quantity: 40, Quantity: 35
+Id: 43, Name: Running Jacket, Price: $45.00, Max Quantity: 15, Quantity: 10
+Id: 44, Name: Wall Mirror, Price: $40.00, Max Quantity: 20, Quantity: 15
+Id: 45, Name: Portable Fan, Price: $25.00, Max Quantity: 25, Quantity: 18
+Id: 46, Name: Coffee Mug Set, Price: $20.00, Max Quantity: 30, Quantity: 25
+Id: 47, Name: Winter Gloves, Price: $18.00, Max Quantity: 30, Quantity: 25
+Id: 48, Name: Electric Razor, Price: $35.00, Max Quantity: 20, Quantity: 15
+Id: 49, Name: Desk Organizer, Price: $15.00, Max Quantity: 40, Quantity: 35
+Id: 50, Name: Portable Hard Drive, Price: $60.00, Max Quantity: 15, Quantity: 12

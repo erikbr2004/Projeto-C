@@ -5,9 +5,9 @@
 #include <Windows.h>
 #include "product.h"
 
-void menuCreateProd(int* isRunning, Product* ptrProd, int* prodQuantity);
-void menuDeleteProd(int* isRunning, int idProd, Product* ptrProd);
-void menuAddRmvProd(int* isRunning, int idProd, Product* ptrProd);
-void menuCheckProd(int* isRunning, Product* ptrProd);
-void menuListProd(int* isRunning, Product* ptrProd);
-void menu(int* isRunning, Product* ptrProd);
+void menuCreateProd(FILE* file, int* isRunning);
+void menuDeleteProd(FILE* file, int* isRunning, int idProd);
+void menuAddRmvProd(FILE* file, int* isRunning, int idProd);
+void menuCheckProd(FILE* file, int* isRunning, int idProd);
+void menuListProd(FILE* file, int* isRunning);
+void menu(FILE* file, int* isRunning);

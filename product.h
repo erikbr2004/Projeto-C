@@ -7,9 +7,13 @@
 typedef struct
 {
 	int productId;
-	char productName[50];
+	char* productName;
 	float productPrice;
+	int productMaxQuantity;
 	int productQuantity;
-}Product, *ptrProduct;
+}Product;
 
-Product createProd(char nameProd, float priceProd, int quantidade);
+void createProd(FILE* file, char* nameProd, float priceProd, int maxQuantityProd, int productQuantity);	// Function to create a new product entry in a file
+void deleteProd(FILE* file, int idProd);	// Function to delete a product from the file based on the specified ID
+void checkProd(FILE* file, int idProd);		
+void listOfProd(FILE* file);	// Function to list all products from a file

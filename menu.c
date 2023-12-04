@@ -1,27 +1,24 @@
 #include "menu.h"
 
-void menuCreateProd(int* isRunning, Product* ptrProd, int* ptrProdQuantity)
+void menuCreateProd(FILE* file, int* isRunning)
 {
 	int option;
 	char nameCreateProd[50];
 	float priceAddProd;
+	int maxQuantityAddProd;
 	int quantityAddProd;
 
 	system("cls");
 	printf("Enter product name: ");
-	scanf_s(" %s", nameCreateProd, sizeof(nameCreateProd));
+	scanf_s(" %[^\n]", nameCreateProd, 50);
 	printf("Enter product price: ");
-	scanf_s("%f", &priceAddProd);
+	scanf_s(" %f", &priceAddProd);
+	printf("Enter product max stock quantity: ");
+	scanf_s(" %d", &maxQuantityAddProd);
 	printf("Enter product quantity: ");
-	scanf_s("%d", &quantityAddProd);
+	scanf_s(" %d", &quantityAddProd);
 	
-	//*ptrProdQuantity++;
-	//ptrProd = (Product*)realloc(ptrProd, sizeof(Product) * *ptrProdQuantity);
-	//if (!ptrProd)
-	//{
-		//return EXIT_FAILURE;
-	//}
-	//createProd(nameCreateProd, priceAddProd, quantityAddProd);
+	createProd(file, nameCreateProd, priceAddProd, maxQuantityAddProd, quantityAddProd);
 
 	printf("Product created with success!\n");
 	Sleep(1000);
@@ -34,10 +31,10 @@ void menuCreateProd(int* isRunning, Product* ptrProd, int* ptrProdQuantity)
 	switch (option)
 	{
 	case 1:
-		menuCreateProd(isRunning, ptrProd, ptrProdQuantity);
+		menuCreateProd(file, isRunning);
 		break;
 	case 2:
-		menu(isRunning, ptrProd);
+		menu(file, isRunning);
 		break;
 	case 0:
 		*isRunning = 0;
@@ -48,34 +45,12 @@ void menuCreateProd(int* isRunning, Product* ptrProd, int* ptrProdQuantity)
 	}
 }
 
-void menuDeleteProd(int* isRunning, int idProd, Product* ptrProd)
+void menuDeleteProd(FILE* file, int* isRunning, int idProd)
 {
 	int option;
 	int newProd;
-	char check;
 
-	system("cls");
-	printf("Are you sure you want to delete [NOME PROD] from product list? Y/N: ");
-	scanf_s(" %c", &check);
-
-	switch (check)
-	{
-	case 'y':
-	case 'Y':
-		//funcao para deletar produto da lista de produto com parametro idProd
-		//
-
-		break;
-	case 'n':
-	case 'N':
-		system("cls");
-		printf("Operation aborted!\n");
-		Sleep(800);
-		break;
-	default:
-		printf("Invalid Operation!\n");
-		break;
-	}
+	deleteProd(file, idProd);	//FALTA COISA NA FUNCAO
 
 	system("cls");
 
@@ -86,12 +61,13 @@ void menuDeleteProd(int* isRunning, int idProd, Product* ptrProd)
 	switch (option)
 	{
 	case 1:
+		system("cls");
 		printf("Enter new product ID: ");
 		scanf_s("%d", &newProd);
-		menuDeleteProd(isRunning, newProd, ptrProd);
+		menuDeleteProd(file, isRunning, newProd);
 		break;
 	case 2:
-		menu(isRunning, ptrProd);
+		menu(file, isRunning);
 		break;
 	case 0:
 		*isRunning = 0;
@@ -102,7 +78,7 @@ void menuDeleteProd(int* isRunning, int idProd, Product* ptrProd)
 	}
 }
 
-void menuAddRmvProd(int* isRunning, int idProd, Product* ptrProd)
+void menuAddRmvProd(FILE* file, int* isRunning, int idProd)
 {
 	int quantity;
 
@@ -116,35 +92,34 @@ void menuAddRmvProd(int* isRunning, int idProd, Product* ptrProd)
 	printf("Success!");
 	Sleep(1000);
 
-	menu(isRunning, ptrProd);
+	menu(file, isRunning);
 }
 
-void menuCheckProd(int* isRunning, Product* ptrProd)
+void menuCheckProd(FILE* file, int* isRunning, int idProd)
 {
 	int option;
-	int idProd;
+	int newProd;
 	
 	system("cls");
-	printf("Enter product ID: ");
-	scanf_s("%d", &idProd);
 
-	//funcao para checar qnt do produto
-	//
+	checkProd(file, idProd);
 
-	printf("1) Check another product\n2) Add/Remove product quantity\n3) Go back to main menu\n0) Exit program\n");
+	printf("\n1) Check another product\n2) Add/Remove product quantity\n3) Go back to main menu\n0) Exit program\n");
 	printf("Select an option: ");
 	scanf_s("%d", &option);
 
 	switch (option)
 	{
 	case 1:
-		menuCheckProd(isRunning, ptrProd);
+		printf("Enter new product ID: ");
+		scanf_s("%d", &newProd);
+		menuCheckProd(file, isRunning, newProd);
 		break;
 	case 2:
-		menuAddRmvProd(isRunning, idProd, ptrProd);
+		menuAddRmvProd(file, isRunning, idProd);
 		break;
 	case 3:
-		menu(isRunning, ptrProd);
+		menu(file, isRunning);
 		break;
 	case 0:
 		*isRunning = 0;
@@ -155,12 +130,12 @@ void menuCheckProd(int* isRunning, Product* ptrProd)
 	}
 }
 
-void menuListProd(int* isRunning, Product* ptrProd)
+void menuListProd(FILE* file, int* isRunning)
 {
 	int option;
 	system("cls");
-	//funcao para exibir todos os produtos ja registrados
-	//
+
+	listOfProd(file);
 
 	printf("1) List products again\n2) Go back to main menu\n0) Exit program\n");
 	printf("Select an option: ");
@@ -169,10 +144,10 @@ void menuListProd(int* isRunning, Product* ptrProd)
 	switch (option)
 	{
 	case 1:
-		menuListProd(isRunning, ptrProd);
+		menuListProd(file, isRunning);
 		break;
 	case 2:
-		menu(isRunning, ptrProd);
+		menu(file, isRunning);
 		break;
 	case 0:
 		*isRunning = 0;
@@ -183,20 +158,18 @@ void menuListProd(int* isRunning, Product* ptrProd)
 	}
 }
 
-void menu(int* isRunning, Product* ptrProd)
+void menu(FILE* file, int* isRunning)
 {
 	system("cls");
 	int option;
 	int idProd;
-	int prodQuantity = 0;
-	int* ptrProdQuantity = &prodQuantity;
 
 	while (*isRunning)
 	{
 		printf("1) Create a product\n");
 		printf("2) Delete a product\n");
 		printf("3) Check a product amount\n");
-		printf("4) Add/Remove Product Quantity\n");
+		printf("4) Add/Remove product quantity\n");
 		printf("5) List existing products\n");
 		printf("0) Exit program\n");
 		printf("Select an option: ");
@@ -204,25 +177,28 @@ void menu(int* isRunning, Product* ptrProd)
 		switch (option)
 		{
 		case 1:
-			menuCreateProd(isRunning, ptrProd, ptrProdQuantity);
+			menuCreateProd(file, isRunning);
 			break;
 		case 2:
 			system("cls");
 			printf("Enter the desired product ID: ");
 			scanf_s("%d", &idProd);
-			menuDeleteProd(isRunning, idProd, ptrProd);
+			menuDeleteProd(file, isRunning, idProd);
 			break;
 		case 3:
-			menuCheckProd(isRunning, ptrProd);
+			system("cls");
+			printf("Enter the desired product ID: ");
+			scanf_s("%d", &idProd);
+			menuCheckProd(file, isRunning, idProd);
 			break;
 		case 4:
 			system("cls");
 			printf("Enter the desired product ID: ");
 			scanf_s("%d", &idProd);
-			menuAddRmvProd(isRunning, idProd, ptrProd);
+			menuAddRmvProd(file, isRunning, idProd);
 			break;
 		case 5:
-			menuListProd(isRunning, ptrProd);
+			menuListProd(file, isRunning);
 			break;
 		case 0:
 			*isRunning = 0;
@@ -233,13 +209,5 @@ void menu(int* isRunning, Product* ptrProd)
 		}
 	}
 
-	system("cls");
-	printf("Exiting.");
-	Sleep(275);
-	system("cls");
-	printf("Exiting..");
-	Sleep(275);
-	system("cls");
-	printf("Exiting...");
-	Sleep(190);
+
 }

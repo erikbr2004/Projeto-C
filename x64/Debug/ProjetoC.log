@@ -1,0 +1,8 @@
+﻿  main.c
+C:\Users\LokoDaVida\Desktop\baby\ProjetoC\product.h(16,53): error C2059: syntax error: ')'
+  menu.c
+C:\Users\LokoDaVida\Desktop\baby\ProjetoC\product.h(16,53): error C2059: syntax error: ')'
+C:\Users\LokoDaVida\Desktop\baby\ProjetoC\menu.c(21,2): warning C4013: 'createProd' undefined; assuming extern returning int
+  product.c
+C:\Users\LokoDaVida\Desktop\baby\ProjetoC\product.h(16,53): error C2059: syntax error: ')'
+  Generating Code...
