@@ -82,9 +82,11 @@ void checkProd(FILE* file, int idProd)
 
     if (lastProdId == idProd)   // Check if the product with the specified ID was found
     {
+        // Display information about the found product
         printf(PRODUCT_FORMAT_OUT, lastProdId, lastProdName, lastProdPrice, lastProdMaxQuantity, lastProdQuantity);
-        if (lastProdQuantity < lastProdMaxQuantity * 0.37)
+        if (lastProdQuantity < lastProdMaxQuantity * 0.37)  // Check if the product quantity is less than 37% of the maximum quantity
         {
+            // Display a warning message about low stock and recommend restocking
             printf("The amount of %s is less than 37%% in stock!\nRestock recommended.", lastProdName);
         }
     }
