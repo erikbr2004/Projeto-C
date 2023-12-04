@@ -24,9 +24,6 @@
     <ClCompile Include="product.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="arraymngr.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="menu.h">
@@ -35,13 +32,5 @@
     <ClInclude Include="product.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="arraymngr.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="product.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
   </ItemGroup>
 </Project>

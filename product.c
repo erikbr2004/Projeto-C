@@ -17,7 +17,7 @@ void createProd(FILE* file, char* nameProd, float priceProd, int maxQuantityProd
 	fseek(file, 0, SEEK_SET);	// Move the file cursor to the beginning of the file
 
     // Read the existing product entries to find the last product ID
-	while (fscanf_s(file, PRODUCT_FORMAT_IN, &lastProdId, lastProdName, 50, &lastProdPrice, &lastProdMaxQuantity, &lastProdQuantity) != EOF);
+    while (fscanf_s(file, PRODUCT_FORMAT_IN, &lastProdId, lastProdName, 50, &lastProdPrice, &lastProdMaxQuantity, &lastProdQuantity) != EOF);
 	lastProdId++;
 
 	// Write the new product entry to the file
@@ -84,9 +84,8 @@ void checkProd(FILE* file, int idProd)
     {
         // Display information about the found product
         printf(PRODUCT_FORMAT_OUT, lastProdId, lastProdName, lastProdPrice, lastProdMaxQuantity, lastProdQuantity);
-        if (lastProdQuantity < lastProdMaxQuantity * 0.37)  // Check if the product quantity is less than 37% of the maximum quantity
+        if (lastProdQuantity < lastProdMaxQuantity * 0.37)
         {
-            // Display a warning message about low stock and recommend restocking
             printf("The amount of %s is less than 37%% in stock!\nRestock recommended.", lastProdName);
         }
     }
@@ -100,7 +99,7 @@ void checkProd(FILE* file, int idProd)
 
 void listOfProd(FILE* file)
 {
-	fseek(file, 0, SEEK_SET);	// Move the file cursor to the beginning of the file
+	fseek(file, 0, SEEK_SET);	// Move file cursor to the beginning of the file
 
     // Read and print each product entry until the end of the file
 	while (fscanf_s(file, PRODUCT_FORMAT_IN, &lastProdId, lastProdName, 50, &lastProdPrice, &lastProdMaxQuantity, &lastProdQuantity) != EOF)
