@@ -48,3 +48,6 @@ Id: 47, Name: Winter Gloves, Price: $18.00, Max Quantity: 30, Quantity: 25
 Id: 48, Name: Electric Razor, Price: $35.00, Max Quantity: 20, Quantity: 15
 Id: 49, Name: Desk Organizer, Price: $15.00, Max Quantity: 40, Quantity: 35
 Id: 50, Name: Portable Hard Drive, Price: $60.00, Max Quantity: 15, Quantity: 12
+Id: 51, Name: Sulfuric Acid, Price: $0.00, Max Quantity: 110, Quantity: 37
+Id: 52, Name: Plutonium, Price: $5000000.00, Max Quantity: 5, Quantity: 4
+Id: 53, Name: Uranium, Price: $2500000.00, Max Quantity: 15, Quantity: 9

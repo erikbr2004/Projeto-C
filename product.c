@@ -3,27 +3,29 @@
 const char* PRODUCT_FORMAT_IN = "Id: %d, Name: %[^,], Price: $%f, Max Quantity: %d, Quantity: %d\n";	// Input format string for reading product details from a file
 const char* PRODUCT_FORMAT_OUT = "Id: %d, Name: %s, Price: $%.2f, Max Quantity: %d, Quantity: %d\n";	// Output format string for writing product details to a file
 
-// Variables to store the details of the last read product
-int     lastProdId = 0;               // Last product ID
-char    lastProdName[50];             // Last product name (up to 50 characters)
-float   lastProdPrice = 0;            // Last product price
-int     lastProdMaxQuantity = 0;      // Last product max quantity
-int     lastProdQuantity = 0;         // Last product quantity
-
 void createProd(FILE* file, char* nameProd, float priceProd, int maxQuantityProd, int quantityProd)
 {
+    Product prod;
+
 	fseek(file, 0, SEEK_SET);	// Move the file cursor to the beginning of the file
 
     // Read the existing product entries to find the last product ID
-    while (fscanf_s(file, PRODUCT_FORMAT_IN, &lastProdId, lastProdName, 50, &lastProdPrice, &lastProdMaxQuantity, &lastProdQuantity) != EOF);
-	lastProdId++;
+    while (fscanf_s(file, PRODUCT_FORMAT_IN, &prod.productId, prod.productName, 50, &prod.productPrice, &prod.productMaxQuantity, &prod.productQuantity) != EOF);
+	prod.productId++;
 
 	// Write the new product entry to the file
-    fprintf(file, PRODUCT_FORMAT_OUT, lastProdId, nameProd, priceProd, maxQuantityProd, quantityProd);
+    fprintf(file, PRODUCT_FORMAT_OUT, prod.productId, nameProd, priceProd, maxQuantityProd, quantityProd);
 }
 
 void deleteProd(FILE* file, int idProd)
 {
+    // Variables to store the details of the last read product
+    int     lastProdId = 0;               // Last product ID
+    char    lastProdName[50];             // Last product name (up to 50 characters)
+    float   lastProdPrice = 0;            // Last product price
+    int     lastProdMaxQuantity = 0;      // Last product max quantity
+    int     lastProdQuantity = 0;         // Last product quantity
+
 	char check;
 
 	fseek(file, 0, SEEK_SET);	// Move the file cursor to the beginning of the file
@@ -73,18 +75,20 @@ void deleteProd(FILE* file, int idProd)
 
 void checkProd(FILE* file, int idProd)
 {
+    Product prod;
+
     fseek(file, 0, SEEK_SET);	// Move the file cursor to the beginning of the file
 
     // Search for the product with the specified ID
-    while (fscanf_s(file, PRODUCT_FORMAT_IN, &lastProdId, lastProdName, 50, &lastProdPrice, &lastProdMaxQuantity, &lastProdQuantity) != EOF && lastProdId != idProd);
+    while (fscanf_s(file, PRODUCT_FORMAT_IN, &prod.productId, prod.productName, 50, &prod.productPrice, &prod.productMaxQuantity, &prod.productQuantity) != EOF && prod.productId != idProd);
 
-    if (lastProdId == idProd)   // Check if the product with the specified ID was found
+    if (prod.productId == idProd)   // Check if the product with the specified ID was found
     {
         // Display information about the found product
-        printf(PRODUCT_FORMAT_OUT, lastProdId, lastProdName, lastProdPrice, lastProdMaxQuantity, lastProdQuantity);
-        if (lastProdQuantity < lastProdMaxQuantity * 0.37)
+        printf(PRODUCT_FORMAT_OUT, prod.productId, prod.productName, prod.productPrice, prod.productMaxQuantity, prod.productQuantity);
+        if (prod.productQuantity < prod.productMaxQuantity * 0.37)
         {
-            printf("The amount of %s is less than 37%% in stock!\nRestock recommended.", lastProdName);
+            printf("The amount of %s is less than 37%% in stock!\nRestock recommended.", prod.productName);
         }
     }
     else
@@ -95,43 +99,17 @@ void checkProd(FILE* file, int idProd)
     }
 }
 
-void listOfProd(FILE* file)
+void listOfProd(FILE* file, Product* pProd)
 {
-    int totalProdQuantity = 0;
-    int i = 0;
-    Product* pProd;
+    
+
+    /*Product prod
 
 	fseek(file, 0, SEEK_SET);	// Move file cursor to the beginning of the file
 
-    while (fscanf_s(file, PRODUCT_FORMAT_IN, &lastProdId, lastProdName, 50, &lastProdPrice, &lastProdMaxQuantity, &lastProdQuantity) != EOF)
-    {
-        ++totalProdQuantity;
-    }
-    
-    // Declare a matrix of pointers to Product structures
-    pProd = (Product*)malloc(sizeof(Product) * totalProdQuantity);
-
-    fseek(file, 0, SEEK_SET);
-    
-    while (fscanf_s(file, PRODUCT_FORMAT_IN, &lastProdId, lastProdName, 50, &lastProdPrice, &lastProdMaxQuantity, &lastProdQuantity) != EOF && i < totalProdQuantity)
-    {
-        pProd[i].productId = lastProdId;
-        pProd[i].productName = lastProdName;
-        pProd[i].productPrice = lastProdPrice;
-        pProd[i].productMaxQuantity = lastProdMaxQuantity;
-        pProd[i].productQuantity = lastProdQuantity;
-
-        ++i;
-    }
-
-    printf(PRODUCT_FORMAT_OUT, pProd[2].productId, pProd[2].productName, pProd[2].productPrice, pProd[2].productMaxQuantity, pProd[2].productQuantity);
-    printf(PRODUCT_FORMAT_OUT, pProd[3].productId, pProd[3].productName, pProd[3].productPrice, pProd[3].productMaxQuantity, pProd[3].productQuantity);
-
-    /*// Read and print each product entry until the end of the file
-	while (fscanf_s(file, PRODUCT_FORMAT_IN, &lastProdId, lastProdName, 50, &lastProdPrice, &lastProdMaxQuantity, &lastProdQuantity) != EOF)
+    // Read and print each product entry until the end of the file
+	while (fscanf_s(file, PRODUCT_FORMAT_IN, &prod.productId, prod.productName, 50, &prod.productPrice, &prod.productMaxQuantity, &prod.productQuantity) != EOF)
 	{
-		printf(PRODUCT_FORMAT_OUT, lastProdId, lastProdName, lastProdPrice, lastProdMaxQuantity, lastProdQuantity);	// Print the details of the current product
+		printf(PRODUCT_FORMAT_OUT, prod.productId, prod.productName, prod.productPrice, prod.productMaxQuantity, prod.productQuantity);	// Print the details of the current product
 	}*/
-
-    free(pProd);
 }
