@@ -10,8 +10,6 @@ float   lastProdPrice = 0;            // Last product price
 int     lastProdMaxQuantity = 0;      // Last product max quantity
 int     lastProdQuantity = 0;         // Last product quantity
 
-
-
 void createProd(FILE* file, char* nameProd, float priceProd, int maxQuantityProd, int quantityProd)
 {
 	fseek(file, 0, SEEK_SET);	// Move the file cursor to the beginning of the file
@@ -99,24 +97,41 @@ void checkProd(FILE* file, int idProd)
 
 void listOfProd(FILE* file)
 {
+    int totalProdQuantity = 0;
+    int i = 0;
+    Product* pProd;
+
 	fseek(file, 0, SEEK_SET);	// Move file cursor to the beginning of the file
 
-    // Read and print each product entry until the end of the file
+    while (fscanf_s(file, PRODUCT_FORMAT_IN, &lastProdId, lastProdName, 50, &lastProdPrice, &lastProdMaxQuantity, &lastProdQuantity) != EOF)
+    {
+        ++totalProdQuantity;
+    }
+    
+    // Declare a matrix of pointers to Product structures
+    pProd = (Product*)malloc(sizeof(Product) * totalProdQuantity);
+
+    fseek(file, 0, SEEK_SET);
+    
+    while (fscanf_s(file, PRODUCT_FORMAT_IN, &lastProdId, lastProdName, 50, &lastProdPrice, &lastProdMaxQuantity, &lastProdQuantity) != EOF && i < totalProdQuantity)
+    {
+        pProd[i].productId = lastProdId;
+        pProd[i].productName = lastProdName;
+        pProd[i].productPrice = lastProdPrice;
+        pProd[i].productMaxQuantity = lastProdMaxQuantity;
+        pProd[i].productQuantity = lastProdQuantity;
+
+        ++i;
+    }
+
+    printf(PRODUCT_FORMAT_OUT, pProd[2].productId, pProd[2].productName, pProd[2].productPrice, pProd[2].productMaxQuantity, pProd[2].productQuantity);
+    printf(PRODUCT_FORMAT_OUT, pProd[3].productId, pProd[3].productName, pProd[3].productPrice, pProd[3].productMaxQuantity, pProd[3].productQuantity);
+
+    /*// Read and print each product entry until the end of the file
 	while (fscanf_s(file, PRODUCT_FORMAT_IN, &lastProdId, lastProdName, 50, &lastProdPrice, &lastProdMaxQuantity, &lastProdQuantity) != EOF)
 	{
 		printf(PRODUCT_FORMAT_OUT, lastProdId, lastProdName, lastProdPrice, lastProdMaxQuantity, lastProdQuantity);	// Print the details of the current product
-	}
+	}*/
+
+    free(pProd);
 }
-
-/*// Define the dimensions of the matrix
-int rows = 3;
-int cols = 3;
-
-// Declare a matrix of pointers to Product structures
-Product** productMatrix = (Product**)malloc(rows * sizeof(Product*));
-
-// Initialize the matrix and allocate memory for each Product
-for (int i = 0; i < rows; ++i)
-{
-    productMatrix[i] = (Product*)malloc(cols * sizeof(Product));
-}*/

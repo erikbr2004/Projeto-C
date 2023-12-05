@@ -2,7 +2,7 @@ Id: 1, Name: Banana, Price: $14.00, Max Quantity: 30, Quantity: 23
 Id: 2, Name: Rice, Price: $12.00, Max Quantity: 50, Quantity: 16
 Id: 3, Name: Digital Camera, Price: $250.00, Max Quantity: 10, Quantity: 8
 Id: 4, Name: Rope, Price: $23.00, Max Quantity: 55, Quantity: 3
-Id: 5, Name: Apples, Price: $10.00, Max Quantity: 40, Quantity: 35
+Id: 5, Name: Apple, Price: $10.00, Max Quantity: 40, Quantity: 35
 Id: 6, Name: Laptop, Price: $800.00, Max Quantity: 20, Quantity: 15
 Id: 7, Name: Running Shoes, Price: $60.00, Max Quantity: 25, Quantity: 18
 Id: 8, Name: Umbrella, Price: $15.00, Max Quantity: 50, Quantity: 42
@@ -48,4 +48,3 @@ Id: 47, Name: Winter Gloves, Price: $18.00, Max Quantity: 30, Quantity: 25
 Id: 48, Name: Electric Razor, Price: $35.00, Max Quantity: 20, Quantity: 15
 Id: 49, Name: Desk Organizer, Price: $15.00, Max Quantity: 40, Quantity: 35
 Id: 50, Name: Portable Hard Drive, Price: $60.00, Max Quantity: 15, Quantity: 12
-Id: 51, Name: Apple, Price: $2.00, Max Quantity: 50, Quantity: 25
