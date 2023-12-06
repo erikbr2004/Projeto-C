@@ -5,9 +5,9 @@
 #include <Windows.h>
 #include "product.h"
 
-void menuCreateProd(FILE* file, int* isRunning);		// Function to create a new product in the file
-void menuDeleteProd(FILE* file, int* isRunning, int idProd);	// Function to delete a product from the file
-void menuAddRmvProd(FILE* file, int* isRunning, int idProd);	// Function to add or remove quantity from a product in the file
-void menuCheckProd(FILE* file, int* isRunning, int idProd);		// Function to check details of a product in the file
-void menuListProd(FILE* file, int* isRunning);		// Function to list all products in the file
-void menu(FILE* file, int* isRunning);		// Main menu function to manage user choices
+void menuCreateProd(FILE* file, int* isRunning);		// Função para criar um novo produto no arquivo
+void menuDeleteProd(FILE* file, int* isRunning, int idProd);	// Função para excluir um produto do arquivo
+void menuAddRmvProd(FILE* file, int* isRunning, int idProd);	// Função para adicionar ou remover quantidade de um produto no arquivo
+void menuCheckProd(FILE* file, int* isRunning, int idProd);		// Função para verificar detalhes de um produto no arquivo
+void menuListProd(FILE* file, int* isRunning);		// Função para listar todos os produtos do arquivo
+void menu(FILE* file, int* isRunning);		// Função do menu principal para gerenciar as escolhas do usuário
