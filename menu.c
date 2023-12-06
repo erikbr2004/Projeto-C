@@ -50,7 +50,7 @@ void menuDeleteProd(FILE* file, int* isRunning, int idProd)
 	int option;
 	int newProd;
 
-	deleteProd(file, idProd);	//FALTA COISA NA FUNCAO
+	deleteProd(file, idProd);
 
 	system("cls");
 
@@ -80,17 +80,9 @@ void menuDeleteProd(FILE* file, int* isRunning, int idProd)
 
 void menuAddRmvProd(FILE* file, int* isRunning, int idProd)
 {
-	int quantity;
-
 	system("cls");
-	printf("Enter the desired amount: ");
-	scanf_s("%d", &quantity);
-
-	//funcao para adicionar ou remover certa qntd de um produto utilizando parametro idProd
-	//
-
-	printf("Success!");
-	Sleep(1000);
+		
+	addRmvProd(file, idProd);
 
 	menu(file, isRunning);
 }

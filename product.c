@@ -1,13 +1,14 @@
 #include "product.h"
+#include "action.h"
 
 const char* PRODUCT_FORMAT_IN = "Id: %d, Name: %[^,], Price: $%f, Max Quantity: %d, Quantity: %d\n";	// Input format string for reading product details from a file
-const char* PRODUCT_FORMAT_OUT = "Id: %d, Name: %s, Price: $%.2f, Max Quantity: %d, Quantity: %d\n";	// Output format string for writing product details to a file
+const char* PRODUCT_FORMAT_OUT = "Id: %5d, Name: %25s, Price: $%8.2f, Max Quantity: %4d, Quantity: %4d\n";    // Output format string for writing product details to a file
 
 void createProd(FILE* file, char* nameProd, float priceProd, int maxQuantityProd, int quantityProd)
 {
     Product prod;
 
-	fseek(file, 0, SEEK_SET);	// Move the file cursor to the beginning of the file
+    rewind(file);	// Move the file cursor to the beginning of the file
 
     // Read the existing product entries to find the last product ID
     while (fscanf_s(file, PRODUCT_FORMAT_IN, &prod.productId, prod.productName, 50, &prod.productPrice, &prod.productMaxQuantity, &prod.productQuantity) != EOF);
@@ -19,26 +20,25 @@ void createProd(FILE* file, char* nameProd, float priceProd, int maxQuantityProd
 
 void deleteProd(FILE* file, int idProd)
 {
-    // Variables to store the details of the last read product
-    int     lastProdId = 0;               // Last product ID
-    char    lastProdName[50];             // Last product name (up to 50 characters)
-    float   lastProdPrice = 0;            // Last product price
-    int     lastProdMaxQuantity = 0;      // Last product max quantity
-    int     lastProdQuantity = 0;         // Last product quantity
+    Product prod;
 
 	char check;
+    int lineToRemove = 1;
 
-	fseek(file, 0, SEEK_SET);	// Move the file cursor to the beginning of the file
+    rewind(file);	// Move the file cursor to the beginning of the file
 
 	// Search for the product with the specified ID
-	while (fscanf_s(file, PRODUCT_FORMAT_IN, &lastProdId, lastProdName, 50, &lastProdPrice, &lastProdMaxQuantity, &lastProdQuantity) != EOF && lastProdId != idProd);
+    while (fscanf_s(file, PRODUCT_FORMAT_IN, &prod.productId, prod.productName, 50, &prod.productPrice, &prod.productMaxQuantity, &prod.productQuantity) != EOF && prod.productId != idProd)
+    {
+        ++lineToRemove;
+    }
 
 	system("cls");
 
-    if (lastProdId == idProd)   // Check if the product with the specified ID was found
+    if (prod.productId == idProd)   // Check if the product with the specified ID was found
     {
         // Prompt the user for confirmation
-        printf("Are you sure you want to DELETE %s (Product ID: %d) from the product list? Y/N: ", lastProdName, lastProdId);
+        printf("Are you sure you want to DELETE %s (Product ID: %d) from the product list? Y/N: ", prod.productName, prod.productId);
         scanf_s(" %c", &check, 1);
 
         switch (check)
@@ -46,8 +46,7 @@ void deleteProd(FILE* file, int idProd)
         case 'y':
         case 'Y':
             // User confirmed deletion, perform the deletion
-            // COMPLETE HERE
-            
+            removeLineFromFile(file, lineToRemove);
             printf("Product deleted successfully!");
             Sleep(800);
             break;
@@ -73,11 +72,87 @@ void deleteProd(FILE* file, int idProd)
     }
 }
 
+void addRmvProd(FILE* file, int idProd)
+{
+    Product prod;
+
+    char check;
+    int amount;
+
+    rewind(file);   // Move the file cursor to the beginning of the file
+
+    // Search for the product with the specified ID
+    while (fscanf_s(file, PRODUCT_FORMAT_IN, &prod.productId, prod.productName, 50, &prod.productPrice, &prod.productMaxQuantity, &prod.productQuantity) != EOF && prod.productId != idProd);
+
+    if (prod.productId == idProd)   // Check if the product with the specified ID was found
+    {
+        // Print the details of the found product
+        printf(PRODUCT_FORMAT_OUT, prod.productId, prod.productName, prod.productPrice, prod.productMaxQuantity, prod.productQuantity);
+
+        // Prompt the user for the desired operation
+        printf("Enter desired operation to be performed\nA: to add\nR: to remove\nQ: to abort\nOption: ");
+        scanf_s(" %c", &check, 1);
+
+        switch (check)
+        {
+        case 'a':
+        case 'A':
+            // Prompt the user to enter the amount to add
+            printf("Enter desired amount to add: ");
+            scanf_s(" %d", &amount);
+
+            // Check if adding the specified amount will exceed the maximum quantity
+            if (prod.productQuantity + amount > prod.productMaxQuantity)
+            {
+                printf("Invalid amount! Product quantity will be bigger than product max quantity!");
+                Sleep(1200);
+                break;
+            }
+            // Call the addProd function to perform the addition
+            addProd(file, idProd, amount);
+            break;
+        case 'r':
+        case 'R':
+            // Prompt the user to enter the amount to remove
+            printf("Enter desired amount to remove: ");
+            scanf_s(" %d", &amount);
+
+            // Check if removing the specified amount will result in a negative quantity
+            if (prod.productQuantity - amount < 0)
+            {
+                printf("Invalid amount! Product quantity will be negative!");
+                Sleep(1200);
+                break;
+            }
+            // Call the rmvProd function to perform the removal
+            rmvProd(file, idProd, amount);
+            break;
+        case 'q':
+        case 'Q':
+            // Abort the operation
+            printf("Operation aborted!");
+            Sleep(800);
+            break;
+        default:
+            // Invalid operation entered
+            printf("Invalid operation!");
+            Sleep(1000);
+            break;
+        }
+    }
+    else
+    {
+        // Product with the specified ID not found
+        printf("Product with ID %d not found!\n", idProd);
+        Sleep(800);
+    }
+}
+
 void checkProd(FILE* file, int idProd)
 {
     Product prod;
 
-    fseek(file, 0, SEEK_SET);	// Move the file cursor to the beginning of the file
+    rewind(file);	// Move the file cursor to the beginning of the file
 
     // Search for the product with the specified ID
     while (fscanf_s(file, PRODUCT_FORMAT_IN, &prod.productId, prod.productName, 50, &prod.productPrice, &prod.productMaxQuantity, &prod.productQuantity) != EOF && prod.productId != idProd);
@@ -99,17 +174,15 @@ void checkProd(FILE* file, int idProd)
     }
 }
 
-void listOfProd(FILE* file, Product* pProd)
+void listOfProd(FILE* file)
 {
-    
+    Product prod;
 
-    /*Product prod
-
-	fseek(file, 0, SEEK_SET);	// Move file cursor to the beginning of the file
+    rewind(file);	// Move file cursor to the beginning of the file
 
     // Read and print each product entry until the end of the file
 	while (fscanf_s(file, PRODUCT_FORMAT_IN, &prod.productId, prod.productName, 50, &prod.productPrice, &prod.productMaxQuantity, &prod.productQuantity) != EOF)
 	{
 		printf(PRODUCT_FORMAT_OUT, prod.productId, prod.productName, prod.productPrice, prod.productMaxQuantity, prod.productQuantity);	// Print the details of the current product
-	}*/
+	}
 }

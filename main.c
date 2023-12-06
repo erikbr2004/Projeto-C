@@ -3,12 +3,14 @@
 #include "menu.h"
 #include "product.h"
 
+
+
 int main()
 {
 	FILE* file;
 	fopen_s(&file, "product.txt", "r+");
 	
-	if (!file)
+	if (file == NULL)
 	{
 		printf("Error opening file!");
 		return EXIT_FAILURE;
