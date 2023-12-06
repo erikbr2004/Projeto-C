@@ -1,12 +1,12 @@
 #include "action.h"
 #include "product.h"
 
-const char* PRODUCT_FORMAT_INP = "Id: %d, Name: %[^,], Price: $%f, Max Quantity: %d, Quantity: %d\n";	// Input format string for reading product details from a file
-const char* PRODUCT_FORMAT_OUTP = "Id: %5d, Name: %25s, Price: $%8.2f, Max Quantity: %4d, Quantity: %4d\n";    // Output format string for writing product details to a file
+const char* PRODUCT_FORMAT_INP = "Id: %d, Name: %[^,], Price: $%f, Max Quantity: %d, Quantity: %d\n";	// String para um formato de entrada para leitura de detalhes do produto em um arquivo
+const char* PRODUCT_FORMAT_OUTP = "Id: %5d, Name: %25s, Price: $%8.2f, Max Quantity: %4d, Quantity: %4d\n";    // String para um formato de saida para impressao de detalhes do produto de um arquivo
 
 void removeLineFromFile(FILE* file, int lineToRemove)
 {
-    // Create a temporary file
+    // Cria um arquivo temporário
     FILE* tempFile;
     tmpfile_s(&tempFile);
     if (tempFile == NULL)
@@ -15,44 +15,43 @@ void removeLineFromFile(FILE* file, int lineToRemove)
         return;
     }
 
-    // Copy lines to the temporary file, excluding the specified line
     int currentLine = 1;
-    char buffer[1024];
+    char buffer[1024];    // Cria um buffer para salvar as informações
 
-    rewind(file);   // Rewind to the beginning of the original file
+    rewind(file);   // Volta o cursor até o inicio do arquivo
 
-    while (fgets(buffer, sizeof(buffer), file) != NULL)     // Get every information saving in a buffer
+    while (fgets(buffer, sizeof(buffer), file) != NULL)     // Obtem todas as informações salvas em um buffer
     {
-        // Check if currentLine is not desired line to remove
+        // Verifica se currentLine não é a linha desejada para remover
         if (currentLine != lineToRemove)
         {
-            fputs(buffer, tempFile);    // Save info from buffer in tempFile
+            fputs(buffer, tempFile);    // Salva informações do buffer em tempFile
         }
 
         currentLine++;
     }
 
-    rewind(tempFile);   // Rewind to the beginning of the temporary file
+    rewind(tempFile);   // Volta o cursor até o inicio do arquivo temporario
 
-    rewind(file);   // Copy contents of the temporary file back to the original file
+    rewind(file);   // Volta o cursor até o inicio do arquivo
 
-    freopen_s(&file, "product.txt", "w", file);     // Deletes every content from file
+    freopen_s(&file, "product.txt", "w", file);     // Exclui todo conteúdo do arquivo sobrescrevendo ele
 
-    freopen_s(&file, "product.txt", "r+", file);    // Reopen file in read/write mode
+    freopen_s(&file, "product.txt", "r+", file);    // Reabre arquivo em modo leitura/gravação
 
-    while (fgets(buffer, sizeof(buffer), tempFile) != NULL)     // Writes every data saved in tempFile in file
+    while (fgets(buffer, sizeof(buffer), tempFile) != NULL)     // Grava todos os dados salvos em tempFile no arquivo
     {
         fputs(buffer, file);
     }
 
     remove("temp.txt");
 
-    fclose(tempFile);   // Close the temporary file
+    fclose(tempFile);   // Fecha o arquivo temporário
 }
 
 void addProd(FILE* file, int idProd, int amount)
 {
-    // Create a temporary file
+    // Cria um arquivo temporário
     FILE* tempFile;
     tmpfile_s(&tempFile);
     if (tempFile == NULL)
@@ -63,42 +62,41 @@ void addProd(FILE* file, int idProd, int amount)
 
     Product prod;
 
-    char buffer[1024];
+    char buffer[1024];    // Cria um buffer para salvar as informações
     int id = 0;
 
-    // Rewind to the beginning of the original file
+    // Volta o cursor até o inicio do arquivo
     rewind(file);
 
-    // Read each line from the original file
+    // Le cada linha do arquivo original
     while (fscanf_s(file, PRODUCT_FORMAT_INP, &prod.productId, prod.productName, 50, &prod.productPrice, &prod.productMaxQuantity, &prod.productQuantity) != EOF)
     {
-        if (prod.productId == idProd)
-        {
-            // Found the product to update
+        if (prod.productId == idProd)    // Encontra o produto para atualizar
+        {            
             prod.productQuantity += amount;
             id = prod.productId;
         }
 
-        // Write the modified or unmodified line to the temporary file
+        // Grava a linha modificada ou não modificada no arquivo temporário
         fprintf(tempFile, PRODUCT_FORMAT_OUTP, prod.productId, prod.productName, prod.productPrice, prod.productMaxQuantity, prod.productQuantity);
     }
 
-    rewind(tempFile);   // Rewind to the beginning of the temporary file
+    rewind(tempFile);   // Volta o cursor até o inicio do arquivo temporario
 
-    rewind(file);   // Rewind to the beginning of the original file
+    rewind(file);   // Volta o cursor até o inicio do arquivo
 
-    freopen_s(&file, "product.txt", "w", file);     // Deletes every content from file
+    freopen_s(&file, "product.txt", "w", file);     // Exclui todo conteúdo do arquivo sobrescrevendo ele
 
-    freopen_s(&file, "product.txt", "r+", file);    // Reopen file in read/write mode
+    freopen_s(&file, "product.txt", "r+", file);    // Reabre arquivo em modo leitura/gravação
 
-    while (fgets(buffer, sizeof(buffer), tempFile) != NULL)     // Writes every data saved in tempFile in file
+    while (fgets(buffer, sizeof(buffer), tempFile) != NULL)     // Grava todos os dados salvos em tempFile no arquivo
     {
         fputs(buffer, file);
     }
 
     remove("temp.txt");
 
-    fclose(tempFile);   // Close the temporary file
+    fclose(tempFile);   // Fecha o arquivo temporario
 
     printf("Amount successfuly added to ID %d", id);
     Sleep(800);
@@ -106,7 +104,7 @@ void addProd(FILE* file, int idProd, int amount)
 
 void rmvProd(FILE* file, int idProd, int amount)
 {
-    // Create a temporary file
+    // Cria um arquivo temporario
     FILE* tempFile;
     tmpfile_s(&tempFile);
     if (tempFile == NULL)
@@ -120,39 +118,38 @@ void rmvProd(FILE* file, int idProd, int amount)
     char buffer[1024];
     int id = 0;
 
-    // Rewind to the beginning of the original file
+    // Voltar o cursor até o inicio do arquivo
     rewind(file);
 
-    // Read each line from the original file
+    // Le cada linha do arquivo original
     while (fscanf_s(file, PRODUCT_FORMAT_INP, &prod.productId, prod.productName, 50, &prod.productPrice, &prod.productMaxQuantity, &prod.productQuantity) != EOF)
     {
-        if (prod.productId == idProd)
+        if (prod.productId == idProd)    // Encontra o produto para atualizar
         {
-            // Found the product to update
             prod.productQuantity -= amount;
             id = prod.productId;
         }
 
-        // Write the modified or unmodified line to the temporary file
+        // Grava a linha modificada ou não modificada no arquivo temporário
         fprintf(tempFile, PRODUCT_FORMAT_OUTP, prod.productId, prod.productName, prod.productPrice, prod.productMaxQuantity, prod.productQuantity);
     }
 
-    rewind(tempFile);   // Rewind to the beginning of the temporary file
+    rewind(tempFile);   // Volta o cursor até o inicio do arquivo temporario
 
-    rewind(file);   // Rewind to the beginning of the original file
+    rewind(file);   // Volta o cursor até o inicio do arquivo
 
-    freopen_s(&file, "product.txt", "w", file);     // Deletes every content from file
+    freopen_s(&file, "product.txt", "w", file);     // Exclui todo conteúdo do arquivo sobrescrevendo ele
 
-    freopen_s(&file, "product.txt", "r+", file);    // Reopen file in read/write mode
+    freopen_s(&file, "product.txt", "r+", file);    // Reabre arquivo em modo leitura/gravação
 
-    while (fgets(buffer, sizeof(buffer), tempFile) != NULL)     // Writes every data saved in tempFile in file
+    while (fgets(buffer, sizeof(buffer), tempFile) != NULL)     // Grava todos os dados salvos em tempFile no arquivo
     {
         fputs(buffer, file);
     }
 
     remove("temp.txt");
 
-    fclose(tempFile);   // Close the temporary file
+    fclose(tempFile);   // Fecha o arquivo temporario
 
     printf("Amount successfuly removed from ID %d", id);
     Sleep(800);
