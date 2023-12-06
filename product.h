@@ -13,8 +13,8 @@ typedef struct
 	int productQuantity;
 }Product;
 
-void createProd(FILE* file, char* nameProd, float priceProd, int maxQuantityProd, int quantityProd);	// Function to create a new product entry in a file
-void deleteProd(FILE* file, int idProd);	// Function to delete a product from the file based on the specified ID
-void addRmvProd(FILE* file, int idProd);	// Funtion to add or remove a specific amount of a product
-void checkProd(FILE* file, int idProd);		// Function to check and display information about a product with a given ID in a file
-void listOfProd(FILE* file);	// Function to list all products from a file
+void createProd(FILE* file, char* nameProd, float priceProd, int maxQuantityProd, int quantityProd);	// Função para criar uma nova entrada de produto em um arquivo
+void deleteProd(FILE* file, int idProd);	// Função para excluir um produto do arquivo com base no ID especificado
+void addRmvProd(FILE* file, int idProd);	// Função para adicionar ou remover uma quantidade específica de um produto
+void checkProd(FILE* file, int idProd);		// Função para verificar e exibir informações sobre um produto com um determinado ID em um arquivo
+void listOfProd(FILE* file);	// Função para listar todos os produtos de um arquivo
